@@ -29,8 +29,7 @@ impl From<String> for Error {
 
 pub type Result<T> = std::result::Result<T, Error>;
 
-pub fn default_error_handler(error: &Error, output: &mut dyn Write) {
-    use nu_ansi_term::Color::Red;
-
-    writeln!(output, "{}: {}", Red.paint("[rust_templates error]"), error).ok();
+pub fn default_error_handler(error: &Error, output: &mut impl Write) {
+    let err_prefix = nu_ansi_term::Color::Red.paint("[rust_templates error] ");
+    writeln!(output, "{}{}", err_prefix, error).ok();
 }

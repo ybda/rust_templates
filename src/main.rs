@@ -1,7 +1,7 @@
 mod error;
 use std::process;
 
-use error::Result;
+use error::{Result,Error};
 
 fn main() {
     run().unwrap_or_else(|e| {
@@ -13,5 +13,7 @@ fn main() {
 fn run() -> Result<()> {
     println!("Hello world!");
 
-    Ok(())
+    Err(Error::from("Test error"))
+
+    //Ok(())
 }
