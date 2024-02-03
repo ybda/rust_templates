@@ -49,12 +49,12 @@ fn configure_logger(log_level: LevelFilter) {
         debug_assert_ne!(record.level(), Level::Error);
 
         match record.level() {
-            Level::Warn => {
-                writeln!(buf, "{}{}", &warn_prefix, record.args())?;
-                return Ok(());
-            }
             Level::Trace => {
                 writeln!(buf, "{}{}", &trace_prefix, record.args())?;
+                return Ok(());
+            }
+            Level::Warn => {
+                writeln!(buf, "{}{}", &warn_prefix, record.args())?;
                 return Ok(());
             }
             _ => {
