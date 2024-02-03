@@ -1,3 +1,4 @@
+use crate::constants;
 use std::io::Write;
 
 use thiserror::Error;
@@ -30,11 +31,6 @@ impl From<String> for Error {
 pub type Result<T> = std::result::Result<T, Error>;
 
 pub fn default_error_handler(error: &Error, output: &mut dyn Write) {
-    use nu_ansi_term::Color::Red;
-
-    match error {
-        _ => {
-            writeln!(output, "{}: {}", Red.paint("[rust_templates error]"), error).ok();
-        }
-    };
+    let err_prefix = nu_ansi_term::Color::Red.paint(constants::ERR_PREFIX);
+    writeln!(output, "{}{}", err_prefix, error).ok();
 }

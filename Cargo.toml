@@ -2,9 +2,20 @@
 name = "rust_templates"
 version = "0.1.0"
 edition = "2021"
+description = "Templates for rust cli apps"
+categories = ["command-line-interface", "command-line-utilities"]
+build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "4.4.18", features = ["cargo", "derive"] }
+env_logger = "0.11.1"
+log = "0.4.20"
 nu-ansi-term = "0.50"
+shadow-rs = "0.26.1"
 thiserror = "1.0"
+
+[build-dependencies]
+shadow-rs = "0.26.1"
+
