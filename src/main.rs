@@ -20,7 +20,7 @@ fn main() {
 fn run() -> Result<()> {
     let cli = Cli::parse();
 
-    logging::configure(&cli)?;
+    logging::configure(cli.verbose, cli.log_level.as_ref().map(|x| x.as_str()))?;
 
     warn!("warn");
     info!("info");

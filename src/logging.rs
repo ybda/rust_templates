@@ -3,27 +3,26 @@ use std::io::Write;
 use env_logger::{Builder, Target};
 use log::{Level, LevelFilter};
 
-use crate::cli::Cli;
 use crate::constants;
 use crate::error::{Error, Result};
 
-pub fn configure(cli: &Cli) -> Result<()> {
-    let log_level = log_level_from_cli(&cli)?;
+pub fn configure(verbose: bool, log_level: Option<&str>) -> Result<()> {
+    let log_level = log_level_from_cli(verbose, log_level)?;
     configure_logger(log_level);
     Ok(())
 }
 
-fn log_level_from_cli(cli: &Cli) -> Result<LevelFilter> {
-    if cli.verbose {
+fn log_level_from_cli(verbose: bool, log_level: Option<&str>) -> Result<LevelFilter> {
+    if verbose {
         return Ok(LevelFilter::Debug);
     }
 
-    let log_level = match &cli.log_level {
+    let log_level = match log_level {
         None => return Ok(LevelFilter::Info),
         Some(s) => s,
     };
 
-    return Ok(match log_level.as_str() {
+    return Ok(match log_level {
         "error" => LevelFilter::Error,
         "warning" | "warn" => LevelFilter::Warn,
         "info" => LevelFilter::Info,
