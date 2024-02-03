@@ -1,7 +1,7 @@
 use std::io::Write;
 
 use env_logger::{Builder, Target};
-use log::{debug, Level, LevelFilter};
+use log::{Level, LevelFilter};
 
 use crate::cli::Cli;
 use crate::constants;

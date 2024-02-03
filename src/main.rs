@@ -5,7 +5,7 @@ mod logging;
 use std::process;
 
 use clap::Parser;
-use error::{Result,Error};
+use error::{Error, Result};
 use log::{debug, info, trace, warn};
 
 use crate::cli::Cli;

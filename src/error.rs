@@ -1,7 +1,8 @@
-use crate::constants;
 use std::io::Write;
 
 use thiserror::Error;
+
+use crate::constants;
 
 #[derive(Error, Debug)]
 #[non_exhaustive]
