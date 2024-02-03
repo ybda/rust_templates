@@ -8,7 +8,7 @@ use crate::logging;
 #[derive(Parser)]
 #[command(version, about, long_about = None, args_conflicts_with_subcommands = true, arg_required_else_help = true)]
 pub struct Cli {
-    /// Directory to get words from
+    /// Directory to process
     #[clap(value_hint = ValueHint::DirPath)]
     pub directory: PathBuf,
 
