@@ -1,5 +1,6 @@
 mod error;
 use std::process;
+
 use error::Result;
 
 fn main() {
