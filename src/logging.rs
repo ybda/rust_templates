@@ -48,17 +48,20 @@ fn configure_logger(log_level: LevelFilter) {
         // module
         debug_assert_ne!(record.level(), Level::Error);
 
-        if record.level() == Level::Warn {
-            writeln!(buf, "{}{}", &warn_prefix, record.args())?;
-            return Ok(());
+        match record.level() {
+            Level::Warn => {
+                writeln!(buf, "{}{}", &warn_prefix, record.args())?;
+                return Ok(());
+            }
+            Level::Trace => {
+                writeln!(buf, "{}{}", &trace_prefix, record.args())?;
+                return Ok(());
+            }
+            _ => {
+                writeln!(buf, "{}", record.args())?;
+                return Ok(());
+            }
         }
-        if record.level() == Level::Trace {
-            writeln!(buf, "{}{}", &trace_prefix, record.args())?;
-            return Ok(());
-        }
-        writeln!(buf, "{}", record.args())?;
-
-        Ok(())
     });
 
     logger.init();

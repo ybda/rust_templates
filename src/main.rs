@@ -4,7 +4,6 @@ mod error;
 mod logging;
 use std::process;
 
-use clap::Parser;
 use error::{Error, Result};
 use log::{debug, info, trace, warn};
 
@@ -18,9 +17,7 @@ fn main() {
 }
 
 fn run() -> Result<()> {
-    let cli = Cli::parse();
-
-    logging::configure(cli.verbose, cli.log_level.as_ref().map(|x| x.as_str()))?;
+    let cli = Cli::new_with_logging()?;
 
     warn!("warn");
     info!("info");
@@ -28,7 +25,8 @@ fn run() -> Result<()> {
     trace!("trace");
 
     info!("dir is `{}`", cli.directory.to_string_lossy());
+    info!("maxlevel is `{}`", log::max_level());
 
-    Err(Error::from("Test error"))
+    Err(Error::from("test error"))
     //Ok(())
 }
